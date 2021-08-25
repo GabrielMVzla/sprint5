@@ -17,6 +17,6 @@ public class Cliente implements Serializable
 
     private String nombres, apellidos;
 
-    @Email
+    @Email(message = "problemas con el correo")
     private String email;
 }
