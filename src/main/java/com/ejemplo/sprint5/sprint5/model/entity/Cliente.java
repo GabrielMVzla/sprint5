@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 @Entity
@@ -13,10 +14,9 @@ public class Cliente implements Serializable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_cliente_pk")
     private String idCliente;
 
-    private String nombres, apellidos;
-
-    @Email(message = "problemas con el correo")
-    private String email;
+    @NotBlank
+    private String nombres, apellidos, direccion;
 }
