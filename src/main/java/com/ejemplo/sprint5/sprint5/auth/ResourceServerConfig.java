@@ -11,11 +11,11 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter
 {
 	//este método es por el lado de oAuth
-
 	@Override
 	public void configure(HttpSecurity http) throws Exception 
 	{
-		http.authorizeRequests().antMatchers(HttpMethod.GET, "/**").permitAll() //nuestras rutas publicas que cualquier usuario puede acceder independiente si ha iniciado sesión o no
+		http.authorizeRequests()
+				.antMatchers(HttpMethod.GET, "/**").permitAll() //nuestras rutas publicas que cualquier usuario puede acceder independiente si ha iniciado sesión o no
 //	        	.antMatchers(HttpMethod.POST, "/api/registrar").permitAll()
 	        	.anyRequest()
 	        	.authenticated()

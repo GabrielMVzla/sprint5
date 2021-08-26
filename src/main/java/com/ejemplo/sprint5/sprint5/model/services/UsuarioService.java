@@ -36,7 +36,6 @@ public class UsuarioService implements UserDetailsService, IUsuarioService
 
 		if(usuario == null)
 		{
-			log.info("Error en el login: no existe el usuario '" + usuario + "' en el sistema!");
 			throw new UsernameNotFoundException("Error en el login: no existe el usuario '"+usuario+"' en el sistema!");
 		}
 
