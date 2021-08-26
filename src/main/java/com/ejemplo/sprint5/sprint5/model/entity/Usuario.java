@@ -46,6 +46,10 @@ public class Usuario implements Serializable
 	private String password;
 	
 	private Boolean enabled;
+
+	private String nombres;
+
+	private String apellidos;
 	
 	@Email(message = "problemas con el correo")
 	@NotBlank
