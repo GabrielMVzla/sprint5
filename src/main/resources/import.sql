@@ -1,5 +1,5 @@
-INSERT INTO clientes ( nombres, apellidos, email) VALUES ( 'gabriel', 'Montes', 'gabriel@hotmail.com');
-INSERT INTO clientes ( nombres, apellidos, email) VALUES ( 'Jose', 'Valenzuela', 'jose@hotmail.com');
-INSERT INTO clientes ( nombres, apellidos, email) VALUES ( 'Rey', 'Perez', 'rey@hotmail.com');
-INSERT INTO clientes ( nombres, apellidos, email) VALUES ( 'Luis', 'Lopez', 'luis@hotmail.com' );
-INSERT INTO clientes ( nombres, apellidos, email) VALUES ( 'Luz', 'Pena', 'luz@hotmail.com');
+INSERT INTO clientes ( nombres, apellidos, direccion) VALUES ( 'gabriel', 'Montes', 'Rios');
+INSERT INTO clientes ( nombres, apellidos, direccion) VALUES ( 'Jose', 'Valenzuela', 'Lirios');
+INSERT INTO clientes ( nombres, apellidos, direccion) VALUES ( 'Rey', 'Perez', 'Cucas');
+INSERT INTO clientes ( nombres, apellidos, direccion) VALUES ( 'Luis', 'Lopez', 'Loro' );
+INSERT INTO clientes ( nombres, apellidos, direccion) VALUES ( 'Luz', 'Pena', 'Centro');
