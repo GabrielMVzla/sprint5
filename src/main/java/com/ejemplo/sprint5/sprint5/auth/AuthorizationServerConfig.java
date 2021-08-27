@@ -34,7 +34,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception
 	{	
-		security.tokenKeyAccess("permitAll()") //todo usuario puede autenticarse en el endpoint oauth/token, es nuestra ruta de login para iniciar sesión en nuestro autorizationService
+		security.tokenKeyAccess("permitAll()") // todo usuario puede autenticarse en el endpoint oauth/token, es nuestra ruta de login para iniciar sesión en nuestro autorizationService
 		.checkTokenAccess("isAuthenticated()"); //cada que queremos acceder a una pagina protegida debemos enviar nuestro token, y solo los clientes autenticados pueden acceder a esta ruta
 		//solo tenemos 2 endpoints o rutas en nuestro authorizationService, están protegidos por authentication basic utilizando las credenciales del cliente es decir de la app, se envia en cliente id con su secret
 	}
@@ -47,7 +47,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception 
 	{
 		clients.inMemory()
-				.withClient("vueapp")
+				.withClient("angularapp")
 				.secret(passwordEncoder.encode("12345"))
 				.scopes("read", "write") //para permitir al usuario leer y escribir
 				.authorizedGrantTypes("password", "refresh_token") //utilizamos password cuando es con credenciales, cuando nuestros users existen en nuestro sistema de backend, para autenticar requiere username y passwd

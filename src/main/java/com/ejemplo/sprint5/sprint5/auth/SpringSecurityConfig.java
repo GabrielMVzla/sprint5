@@ -68,7 +68,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 	public CorsConfigurationSource corsConfigurationSource() 
 	{
 		CorsConfiguration config = new CorsConfiguration();
-		config.setAllowedOrigins(Arrays.asList("http://localhost:8080", "http://web/*", "http://frontend/*")); //asterisco para todos los dominios, también aplica para el método de abajo, aunque la idea es ser más especificos
+		config.setAllowedOrigins(Arrays.asList("http://localhost:4200", "http://web/*", "http://frontend/*")); //asterisco para todos los dominios, también aplica para el método de abajo, aunque la idea es ser más especificos
 		config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));//pq en algunos navegadores cuando enviamos una solicitud para autenticarnos y solciitar el token a la ruta oauth token, esa petición se envía como OPTIONS 
 		config.setAllowCredentials(true); //permite credenciales
 		config.setAllowedHeaders(Arrays.asList("Content-Type", "Authorization")); //permite headers

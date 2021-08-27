@@ -15,7 +15,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter
 	public void configure(HttpSecurity http) throws Exception 
 	{
 		http.authorizeRequests()
-				.antMatchers(HttpMethod.GET, "/**").permitAll() //nuestras rutas publicas que cualquier usuario puede acceder independiente si ha iniciado sesión o no
+//				.antMatchers(HttpMethod.GET, "/**").permitAll() //nuestras rutas publicas que cualquier usuario puede acceder independiente si ha iniciado sesión o no
 //	        	.antMatchers(HttpMethod.POST, "/api/registrar").permitAll()
 	        	.anyRequest()
 	        	.authenticated()

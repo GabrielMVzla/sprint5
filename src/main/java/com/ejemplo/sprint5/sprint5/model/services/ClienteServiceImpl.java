@@ -136,7 +136,8 @@ public class ClienteServiceImpl implements IClienteService
         response.put("mensaje", "El cliente ha sido actualizado con éxito!");
         response.put("cliente", clienteActualizado);
 
-        return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED) ;    }
+        return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED) ;
+    }
 
     public boolean erroresBinding( BindingResult result)
     {

@@ -27,8 +27,9 @@ public class ClienteController
     @Autowired
     IClienteService clienteService;
 
-    @GetMapping("clientes/{idCliente}")
+    @GetMapping("cliente/{idCliente}")
     public Cliente obtenerClientes(@PathVariable Long idCliente){        return clienteService.obtenerCliente(idCliente);    }
+
 
     @GetMapping("clientes")
     public List<Cliente> obtenerClientes(){        return clienteService.obtenerClientes();    }
@@ -40,7 +41,7 @@ public class ClienteController
         return clienteService.obtenerClientes(pageable);
     }
 
-    @PostMapping("clientes")
+    @PostMapping("cliente")
     public ResponseEntity<Map<String,Object>> guardarCliente(@Valid @RequestBody Cliente cliente, BindingResult result)
     {
         return clienteService.guardarCliente(cliente, result);
