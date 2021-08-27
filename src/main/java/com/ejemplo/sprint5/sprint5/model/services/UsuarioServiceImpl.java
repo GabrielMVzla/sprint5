@@ -23,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 @Transactional
 
 //Interfaz proveída por Spring para el proceso de autenticación
-public class UsuarioService implements UserDetailsService, IUsuarioService
+public class UsuarioServiceImpl implements UserDetailsService, IUsuarioService
 {	
 	@Autowired
 	private IUsuarioDao usuarioDao;

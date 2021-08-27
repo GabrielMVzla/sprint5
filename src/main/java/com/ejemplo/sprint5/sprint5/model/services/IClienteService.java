@@ -14,8 +14,16 @@ import java.util.Map;
 
 public interface IClienteService
 {
+
+    /**
+     * Método que retonar listado de clientes
+     *
+     * @return List<Cliente>
+     */
     List<Cliente> obtenerClientes();
+
     Page<Cliente> obtenerClientes(Pageable pageable);
+
     Cliente obtenerCliente(Long idCliente);
 
     ResponseEntity<Map<String, Object>> guardarCliente(@Valid Cliente cliente, BindingResult result);
@@ -23,5 +31,4 @@ public interface IClienteService
     ResponseEntity<Map<String, Object>> eliminarCliente(Long idCliente);
 
     ResponseEntity<Map<String, Object>> actualizarCliente( Long idCliente, Cliente clienteActualizado, BindingResult result);
-
 }
