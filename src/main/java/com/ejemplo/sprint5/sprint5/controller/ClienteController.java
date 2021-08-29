@@ -25,15 +25,15 @@ public class ClienteController
     @Autowired
     IClienteService clienteService;
 
-    @Secured({"USER", "ADMIN"})
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping("cliente/{idCliente}")
     public Cliente obtenerClientes(@PathVariable Long idCliente){        return clienteService.obtenerCliente(idCliente);    }
 
-    @Secured({"USER", "ADMIN"})
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping("clientes")
     public List<Cliente> obtenerClientes(){     return clienteService.obtenerClientes();    }
 
-    @Secured({"USER", "ADMIN"})
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping("clientes/page/{page}")
     public Page<Cliente> obtenerClientes(@PathVariable Integer page)
     {
@@ -41,21 +41,21 @@ public class ClienteController
         return clienteService.obtenerClientes(pageable);
     }
 
-    @Secured("ADMIN")
+    @Secured("ROLE_ADMIN")
     @PostMapping("cliente")
     public ResponseEntity<Map<String,Object>> guardarCliente(@Valid @RequestBody Cliente cliente, BindingResult result)
     {
         return clienteService.guardarCliente(cliente, result);
     }
 
-    @Secured("ADMIN")
+    @Secured("ROLE_ADMIN")
     @DeleteMapping("cliente/{idCliente}")
     public ResponseEntity<Map<String,Object>> eliminarCliente(@Valid @PathVariable Long idCliente)
     {
         return clienteService.eliminarCliente(idCliente);
     }
 
-    @Secured("ADMIN")
+    @Secured("ROLE_ADMIN")
     @PutMapping("cliente/{idCliente}")
     public ResponseEntity<Map<String,Object>> actualizarCliente(@Valid  @RequestBody Cliente cliente, BindingResult result, @PathVariable Long idCliente)
     {
