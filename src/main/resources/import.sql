@@ -1,10 +1,24 @@
 INSERT INTO clientes ( nombres, apellidos, direccion) VALUES ( 'gabriel', 'Montes', 'Rios');
 INSERT INTO clientes ( nombres, apellidos, direccion) VALUES ( 'Jose', 'Valenzuela', 'Lirios');
 INSERT INTO clientes ( nombres, apellidos, direccion) VALUES ( 'Rey', 'Perez', 'Cucas');
---INSERT INTO clientes ( nombres, apellidos, direccion) VALUES ( 'Luis', 'Lopez', 'Loro' );
---INSERT INTO clientes ( nombres, apellidos, direccion) VALUES ( 'Luz', 'Pena', 'Centro');
-
-
+INSERT INTO clientes ( nombres, apellidos, direccion) VALUES ( 'Luis', 'Lopez', 'Loro' );
+INSERT INTO clientes ( nombres, apellidos, direccion) VALUES ( 'Luz', 'Pena', 'Centro');
+INSERT INTO clientes ( nombres, apellidos, direccion) VALUES ( 'Angel', 'Lopez', 'Loro' );
+INSERT INTO clientes ( nombres, apellidos, direccion) VALUES ( 'Chocotorro', 'Pena', 'Centro');
+INSERT INTO clientes ( nombres, apellidos, direccion) VALUES ( 'gabriel', 'Montes', 'Rios');
+INSERT INTO clientes ( nombres, apellidos, direccion) VALUES ( 'Jose', 'Valenzuela', 'Lirios');
+INSERT INTO clientes ( nombres, apellidos, direccion) VALUES ( 'Rey', 'Perez', 'Cucas');
+INSERT INTO clientes ( nombres, apellidos, direccion) VALUES ( 'Luis', 'Lopez', 'Loro' );
+INSERT INTO clientes ( nombres, apellidos, direccion) VALUES ( 'Luz', 'Pena', 'Centro');
+INSERT INTO clientes ( nombres, apellidos, direccion) VALUES ( 'Angel', 'Lopez', 'Loro' );
+INSERT INTO clientes ( nombres, apellidos, direccion) VALUES ( 'Chocotorro', 'Pena', 'Centro');
+INSERT INTO clientes ( nombres, apellidos, direccion) VALUES ( 'gabriel', 'Montes', 'Rios');
+INSERT INTO clientes ( nombres, apellidos, direccion) VALUES ( 'Jose', 'Valenzuela', 'Lirios');
+INSERT INTO clientes ( nombres, apellidos, direccion) VALUES ( 'Rey', 'Perez', 'Cucas');
+INSERT INTO clientes ( nombres, apellidos, direccion) VALUES ( 'Luis', 'Lopez', 'Loro' );
+INSERT INTO clientes ( nombres, apellidos, direccion) VALUES ( 'Luz', 'Pena', 'Centro');
+INSERT INTO clientes ( nombres, apellidos, direccion) VALUES ( 'Angel', 'Lopez', 'Loro' );
+INSERT INTO clientes ( nombres, apellidos, direccion) VALUES ( 'Chocotorro', 'Pena', 'Centro');
 
 INSERT INTO usuarios (username, password, enabled, nombres, apellidos, email) VALUES ('gabriel', '$2a$10$lmLRIrGU8gRAEf/TJAPnnug62VPk.KSiWj4dbXL.UyRfRsKTDMi7K', true, 'Gabriel', 'Montes', 'correo@correo.com');
 INSERT INTO usuarios (username, password, enabled, nombres, apellidos, email) VALUES ('admin', '$2a$10$Nvj13630BZLJHBtPgNpAEOhGSI8pRMgxxL1ZAYWeilUowXuFQaniW', true, 'José', 'Valenzuela', 'email@email.com');

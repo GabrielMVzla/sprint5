@@ -37,7 +37,8 @@ public class ClienteController
     @GetMapping("clientes/page/{page}")
     public Page<Cliente> obtenerClientes(@PathVariable Integer page)
     {
-        Pageable pageable = PageRequest.of(page, 5);
+        page = page < 0 ? 0 : page;
+        Pageable pageable = PageRequest.of(page, 2);
         return clienteService.obtenerClientes(pageable);
     }
 
