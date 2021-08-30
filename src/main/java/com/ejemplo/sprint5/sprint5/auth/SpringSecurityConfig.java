@@ -88,5 +88,4 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 		bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
 		return bean;
 	}
-	
 }

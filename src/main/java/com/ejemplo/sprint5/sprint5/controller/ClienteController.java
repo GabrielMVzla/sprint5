@@ -8,32 +8,32 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.sql.ResultSet;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
-@RequestMapping("/api") //aquí generamos la URL
+@RequestMapping("/api")
 
 public class ClienteController
 {
     @Autowired
     IClienteService clienteService;
 
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping("cliente/{idCliente}")
     public Cliente obtenerClientes(@PathVariable Long idCliente){        return clienteService.obtenerCliente(idCliente);    }
 
-
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping("clientes")
-    public List<Cliente> obtenerClientes(){        return clienteService.obtenerClientes();    }
+    public List<Cliente> obtenerClientes(){     return clienteService.obtenerClientes();    }
 
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping("clientes/page/{page}")
     public Page<Cliente> obtenerClientes(@PathVariable Integer page)
     {
@@ -41,18 +41,21 @@ public class ClienteController
         return clienteService.obtenerClientes(pageable);
     }
 
+    @Secured("ROLE_ADMIN")
     @PostMapping("cliente")
     public ResponseEntity<Map<String,Object>> guardarCliente(@Valid @RequestBody Cliente cliente, BindingResult result)
     {
         return clienteService.guardarCliente(cliente, result);
     }
 
+    @Secured("ROLE_ADMIN")
     @DeleteMapping("cliente/{idCliente}")
     public ResponseEntity<Map<String,Object>> eliminarCliente(@Valid @PathVariable Long idCliente)
     {
         return clienteService.eliminarCliente(idCliente);
     }
 
+    @Secured("ROLE_ADMIN")
     @PutMapping("cliente/{idCliente}")
     public ResponseEntity<Map<String,Object>> actualizarCliente(@Valid  @RequestBody Cliente cliente, BindingResult result, @PathVariable Long idCliente)
     {
