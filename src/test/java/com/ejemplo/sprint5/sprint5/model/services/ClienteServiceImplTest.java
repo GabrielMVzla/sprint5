@@ -2,10 +2,10 @@ package com.ejemplo.sprint5.sprint5.model.services;
 
 import com.ejemplo.sprint5.sprint5.model.dao.IClienteDao;
 import com.ejemplo.sprint5.sprint5.model.entity.Cliente;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BeanPropertyBindingResult;
@@ -13,69 +13,64 @@ import org.springframework.validation.BindingResult;
 
 import java.util.Map;
 
+import static org.junit.jupiter.api.Assertions.*;
 
+import static org.mockito.Mockito.*;
 
-class ClienteServiceImplTest {
-
+@Slf4j
+class ClienteServiceImplTest
+{
     @Autowired
     private ClienteServiceImpl service;
 
-    private IClienteDao reposirotyMock = Mockito.mock(IClienteDao.class);
+    private IClienteDao reposirotyMock = mock(IClienteDao.class);
 
-    Cliente cliente = new Cliente();
-
+    private Cliente cliente;
 
     @BeforeEach
-    void setUp(){
+    void setUp()
+    {
         cliente = new Cliente();
         cliente.setIdCliente((long) 100);
         cliente.setNombres("Adiel");
         cliente.setApellidos("Lara Ledesma");
         cliente.setDireccion("Calle los sacates #409");
 
-        service = new ClienteServiceImpl(reposirotyMock);
+        service = new ClienteServiceImpl(this.reposirotyMock);
 
-        Mockito.when(reposirotyMock.save(cliente)).thenReturn(cliente);
+        when(this.reposirotyMock.save(cliente)).thenReturn(cliente);
 
-        Mockito.when(reposirotyMock.findById(cliente.getIdCliente())).thenReturn(java.util.Optional.ofNullable(cliente)).thenReturn(null);
-
-
-
+        when(this.reposirotyMock.findById(cliente.getIdCliente())).thenReturn(java.util.Optional.ofNullable(cliente)).thenReturn(null);
     }
 
-
     @Test
-    void guardarCliente() {
+    void guardarCliente()
+    {
         BindingResult result = new BeanPropertyBindingResult(new Object(), "");
-
 
         ResponseEntity<Map<String, Object>> response = service.guardarCliente(cliente, result);
 
+        assertEquals("El cliente ha sido creado con éxito!", response.getBody().get("mensaje"));
+        assertEquals(cliente.toString(), response.getBody().get("cliente").toString());
 
-        Assertions.assertEquals("El cliente ha sido creado con éxito!", response.getBody().get("mensaje"));
-        Assertions.assertEquals(cliente.toString(), response.getBody().get("cliente").toString());
-
-
-
+        log.info("idCliente: {}, {}, {}, {}", cliente.getIdCliente(), cliente.getNombres(), cliente.getApellidos(), cliente.getDireccion());
     }
 
     @Test
-    void eliminarCliente() throws Exception{
-
+    void eliminarCliente() throws Exception
+    {
         service.eliminarCliente((long) 100);
-        Mockito.verify(reposirotyMock).delete(cliente);
-
+        verify(this.reposirotyMock).delete(cliente);
     }
 
     @Test
-    void actualizarCliente() {
+    void actualizarCliente()
+    {
         BindingResult result = new BeanPropertyBindingResult(new Object(), "");
 
         ResponseEntity<Map<String, Object>> response = service.actualizarCliente(cliente.getIdCliente(), cliente, result);
 
-
-        Assertions.assertEquals("El cliente ha sido actualizado con éxito!", response.getBody().get("mensaje"));
-        Assertions.assertEquals(cliente.toString(), response.getBody().get("cliente").toString());
-
+        assertEquals("El cliente ha sido actualizado con éxito!", response.getBody().get("mensaje"));
+        assertEquals(cliente.toString(), response.getBody().get("cliente").toString());
     }
 }
