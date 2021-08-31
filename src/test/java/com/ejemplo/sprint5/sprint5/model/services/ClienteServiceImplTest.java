@@ -51,7 +51,7 @@ class ClienteServiceImplTest
         ResponseEntity<Map<String, Object>> response = service.guardarCliente(cliente, result);
 
         assertEquals("El cliente ha sido creado con éxito!", response.getBody().get("mensaje"));
-        assertEquals(cliente.toString(), response.getBody().get("cliente").toString());
+        assertEquals( cliente.toString(), response.getBody().get("cliente").toString());
 
         log.info("idCliente: {}, {}, {}, {}", cliente.getIdCliente(), cliente.getNombres(), cliente.getApellidos(), cliente.getDireccion());
     }
@@ -60,7 +60,7 @@ class ClienteServiceImplTest
     void eliminarCliente() throws Exception
     {
         service.eliminarCliente((long) 100);
-        verify(this.reposirotyMock).delete(cliente);
+        verify(this.reposirotyMock).delete(cliente); //veces que esperamos se invoque
     }
 
     @Test
