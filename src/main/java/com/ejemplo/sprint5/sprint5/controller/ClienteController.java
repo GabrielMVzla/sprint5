@@ -27,7 +27,7 @@ public class ClienteController
 
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping("cliente/{idCliente}")
-    public Cliente obtenerClientes(@PathVariable Long idCliente){        return clienteService.obtenerCliente(idCliente);    }
+    public Cliente obtenerCliente(@PathVariable Long idCliente){        return clienteService.obtenerCliente(idCliente);    }
 
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping("clientes")

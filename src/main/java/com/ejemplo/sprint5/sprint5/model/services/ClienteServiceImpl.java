@@ -20,29 +20,35 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
-@Slf4j
 public class ClienteServiceImpl implements IClienteService
 {
-    @Autowired
-    IClienteDao IClienteDao;
+
+    IClienteDao iClienteDao;
+
+
+    ClienteServiceImpl(IClienteDao iClienteDao){
+        this.iClienteDao = iClienteDao;
+    }
+
+
     Map<String, Object> response;
     StringBuilder stringBuilder;
 
     @Override
     public List<Cliente> obtenerClientes()
     {
-        return IClienteDao.findAll();
+        return iClienteDao.findAll();
     }
 
     @Override
     public Page<Cliente> obtenerClientes(Pageable pageable)
     {
-        return IClienteDao.findAll(pageable);
+        return iClienteDao.findAll(pageable);
     }
 
     @Override
     public Cliente obtenerCliente(Long idCliente) {
-        return IClienteDao.findById(idCliente).orElse(null);
+        return iClienteDao.findById(idCliente).orElse(null);
     }
 
     @Override
@@ -56,7 +62,7 @@ public class ClienteServiceImpl implements IClienteService
 
         try
         {
-            cliente = IClienteDao.save(cliente);
+            cliente = iClienteDao.save(cliente);
         }
         catch (DataAccessException e)
         {
@@ -76,7 +82,7 @@ public class ClienteServiceImpl implements IClienteService
         response = new HashMap<>();
         stringBuilder = new StringBuilder();
 
-        Cliente clienteAEliminar = IClienteDao.findById(idCliente).orElse(null);
+        Cliente clienteAEliminar = iClienteDao.findById(idCliente).orElse(null);
 
         if(clienteAEliminar == null)
         {
@@ -86,7 +92,7 @@ public class ClienteServiceImpl implements IClienteService
 
         try
         {
-            IClienteDao.delete(clienteAEliminar);
+            iClienteDao.delete(clienteAEliminar);
         }
         catch (DataAccessException e)
         {
@@ -105,7 +111,7 @@ public class ClienteServiceImpl implements IClienteService
         response = new HashMap<>();
         stringBuilder = new StringBuilder();
 
-        Cliente clienteAActualizar = IClienteDao.findById(idCliente).orElse(null);
+        Cliente clienteAActualizar = iClienteDao.findById(idCliente).orElse(null);
 
         if(clienteAActualizar == null)
         {
@@ -124,7 +130,7 @@ public class ClienteServiceImpl implements IClienteService
             clienteAActualizar.setApellidos(clienteActualizado.getApellidos());
             clienteAActualizar.setDireccion(clienteActualizado.getDireccion());
 
-            clienteActualizado = IClienteDao.save(clienteAActualizar);
+            clienteActualizado = iClienteDao.save(clienteAActualizar);
         }
         catch (DataAccessException e)
         {

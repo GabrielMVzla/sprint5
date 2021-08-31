@@ -24,15 +24,21 @@ import lombok.extern.slf4j.Slf4j;
 
 //Interfaz proveída por Spring para el proceso de autenticación
 public class UsuarioServiceImpl implements UserDetailsService, IUsuarioService
-{	
+{
+	private IUsuarioDao iUsuarioDao;
+
 	@Autowired
-	private IUsuarioDao usuarioDao;
+	UsuarioServiceImpl(IUsuarioDao iUsuarioDao){
+		this.iUsuarioDao = iUsuarioDao;
+	}
+
+
 	
 	@Override
 	@Transactional(readOnly=true)//como es una consulta tiene que ser solo de lectura "readOnly"
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
 	{		
-		Usuario usuario = usuarioDao.findByUsername(username);
+		Usuario usuario = iUsuarioDao.findByUsername(username);
 
 		if(usuario == null)
 		{
@@ -52,6 +58,6 @@ public class UsuarioServiceImpl implements UserDetailsService, IUsuarioService
 	@Transactional(readOnly=true)//por defecto el crudRepository ya provee el manejo de transacciones de forma automática y por defecto
 	public Usuario findByUsername(String username)
 	{
-		return usuarioDao.findByUsername(username);
+		return iUsuarioDao.findByUsername(username);
 	}
 }
