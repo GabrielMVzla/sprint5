@@ -1,5 +1,6 @@
 package com.ejemplo.sprint5.sprint5.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,7 +15,7 @@ import static springfox.documentation.builders.PathSelectors.regex;
 @EnableSwagger2
 public class SwaggerConfig
 {
-
+	@Bean
 	public Docket documentation() 
 	{
 		return new Docket(DocumentationType.SWAGGER_2)
