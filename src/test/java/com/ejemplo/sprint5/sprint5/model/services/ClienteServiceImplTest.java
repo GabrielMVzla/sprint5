@@ -44,7 +44,7 @@ class ClienteServiceImplTest
     }
 
     @Test
-    void guardarCliente()
+    void shoudSaveClient()
     {
         BindingResult result = new BeanPropertyBindingResult(new Object(), "");
 
@@ -57,14 +57,14 @@ class ClienteServiceImplTest
     }
 
     @Test
-    void eliminarCliente() throws Exception
+    void whenGivenId_shouldDeleteUser_ifFound() throws Exception
     {
         service.eliminarCliente((long) 100);
         verify(this.reposirotyMock).delete(cliente); //veces que esperamos se invoque
     }
 
     @Test
-    void actualizarCliente()
+    void whenGivenId_shouldUpdateUser_ifFound()
     {
         BindingResult result = new BeanPropertyBindingResult(new Object(), "");
 

@@ -47,16 +47,12 @@ class UsuarioServiceImplTest {
 
         Mockito.when(reposirotyMock.findByUsername("Adiel")).thenReturn(usuario);
 
-        //Mockito.when(reposirotyMock.findByUsername(cliente.getIdCliente())).thenReturn(java.util.Optional.ofNullable(cliente)).thenReturn(null);
-
-
-
     }
 
 
 
     @Test
-    void loadUserByUsername() {
+    void whenGivenUserName_shouldLoadUser() {
         UserDetails response = service.loadUserByUsername("Adiel");
 
 
@@ -66,10 +62,9 @@ class UsuarioServiceImplTest {
     }
 
     @Test
-    void findByUsername() {
+    void whenGivenUserName_shouldReturnUser() {
 
         Usuario response = service.findByUsername("Adiel");
-
 
         Assertions.assertEquals(usuario.getUsername(), response.getUsername());
         Assertions.assertEquals(usuario.getPassword(), response.getPassword());
