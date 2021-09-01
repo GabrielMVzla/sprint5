@@ -1,6 +1,7 @@
 package com.ejemplo.sprint5.sprint5.model.services;
 
 import com.ejemplo.sprint5.sprint5.model.dao.IClienteDao;
+import com.ejemplo.sprint5.sprint5.model.dto.ClienteDto;
 import com.ejemplo.sprint5.sprint5.model.entity.Cliente;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
@@ -25,7 +26,8 @@ class ClienteServiceImplTest
 
     private IClienteDao reposirotyMock = mock(IClienteDao.class);
 
-    private Cliente cliente;
+    private ClienteDto clienteDto = new ClienteDto();
+    Cliente cliente ;
 
     @BeforeEach
     void setUp()
@@ -48,7 +50,7 @@ class ClienteServiceImplTest
     {
         BindingResult result = new BeanPropertyBindingResult(new Object(), "");
 
-        ResponseEntity<Map<String, Object>> response = service.guardarCliente(cliente, result);
+        ResponseEntity<Map<String, Object>> response = service.guardarCliente(clienteDto, result);
 
         assertEquals("El cliente ha sido creado con éxito!", response.getBody().get("mensaje"));
         assertEquals( cliente.toString(), response.getBody().get("cliente").toString());
@@ -68,7 +70,7 @@ class ClienteServiceImplTest
     {
         BindingResult result = new BeanPropertyBindingResult(new Object(), "");
 
-        ResponseEntity<Map<String, Object>> response = service.actualizarCliente(cliente.getIdCliente(), cliente, result);
+        ResponseEntity<Map<String, Object>> response = service.actualizarCliente(cliente.getIdCliente(), clienteDto, result);
 
         assertEquals("El cliente ha sido actualizado con éxito!", response.getBody().get("mensaje"));
         assertEquals(cliente.toString(), response.getBody().get("cliente").toString());
