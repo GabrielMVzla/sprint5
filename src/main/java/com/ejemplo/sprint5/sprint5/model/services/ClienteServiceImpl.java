@@ -19,12 +19,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class ClienteServiceImpl implements IClienteService
 {
-
     IClienteDao iClienteDao;
-
 
     ClienteServiceImpl(IClienteDao iClienteDao){
         this.iClienteDao = iClienteDao;
@@ -152,7 +151,10 @@ public class ClienteServiceImpl implements IClienteService
 
             List<String> errors = result.getFieldErrors()
                     .stream()
-                    .map(err -> stringBuilder.append("El campo '").append(err.getField()).append("' ").append(err.getDefaultMessage()).toString())
+                    .map(err -> {
+                        stringBuilder = new StringBuilder();
+                        return stringBuilder.append("El campo '").append(err.getField()).append("' ").append(err.getDefaultMessage()).toString();
+                    })
                     .collect(Collectors.toList());
 
             response.put("errors", errors);
