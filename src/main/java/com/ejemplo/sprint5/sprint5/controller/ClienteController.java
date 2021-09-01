@@ -1,5 +1,6 @@
 package com.ejemplo.sprint5.sprint5.controller;
 
+import com.ejemplo.sprint5.sprint5.model.dto.ClienteDto;
 import com.ejemplo.sprint5.sprint5.model.entity.Cliente;
 import com.ejemplo.sprint5.sprint5.model.services.IClienteService;
 import lombok.extern.slf4j.Slf4j;
@@ -43,7 +44,7 @@ public class ClienteController
 
     @Secured("ROLE_ADMIN")
     @PostMapping("cliente")
-    public ResponseEntity<Map<String,Object>> guardarCliente(@Valid @RequestBody Cliente cliente, BindingResult result)
+    public ResponseEntity<Map<String,Object>> guardarCliente(@Valid @RequestBody ClienteDto cliente, BindingResult result)
     {
         return clienteService.guardarCliente(cliente, result);
     }
@@ -57,7 +58,7 @@ public class ClienteController
 
     @Secured("ROLE_ADMIN")
     @PutMapping("cliente/{idCliente}")
-    public ResponseEntity<Map<String,Object>> actualizarCliente(@Valid  @RequestBody Cliente cliente, BindingResult result, @PathVariable Long idCliente)
+    public ResponseEntity<Map<String,Object>> actualizarCliente(@Valid  @RequestBody ClienteDto cliente, BindingResult result, @PathVariable Long idCliente)
     {
         return clienteService.actualizarCliente(idCliente, cliente, result);
     }

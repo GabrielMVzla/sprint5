@@ -1,6 +1,7 @@
 package com.ejemplo.sprint5.sprint5.model.services;
 
 import com.ejemplo.sprint5.sprint5.model.dao.IClienteDao;
+import com.ejemplo.sprint5.sprint5.model.dto.ClienteDto;
 import com.ejemplo.sprint5.sprint5.model.entity.Cliente;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,7 @@ public class ClienteServiceImpl implements IClienteService
     Map<String, Object> response;
     StringBuilder stringBuilder;
 
+
     @Override
     public List<Cliente> obtenerClientes()
     {
@@ -51,17 +53,22 @@ public class ClienteServiceImpl implements IClienteService
     }
 
     @Override
-    public ResponseEntity<Map<String, Object>> guardarCliente(@Valid Cliente cliente, BindingResult result)
+    public ResponseEntity<Map<String, Object>> guardarCliente(@Valid ClienteDto cliente, BindingResult result)
     {
         response = new HashMap<>();
         stringBuilder = new StringBuilder();
+
+        Cliente clienteGuardado = new Cliente();
 
         if(erroresBinding(result))
             return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
 
         try
         {
-            cliente = iClienteDao.save(cliente);
+            clienteGuardado.setApellidos(cliente.getApellidos());
+            clienteGuardado.setNombres(cliente.getNombres());
+            clienteGuardado.setDireccion(cliente.getDireccion());
+            clienteGuardado = iClienteDao.save(clienteGuardado);
         }
         catch (DataAccessException e)
         {
@@ -70,7 +77,7 @@ public class ClienteServiceImpl implements IClienteService
             return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         response.put("mensaje", "El cliente ha sido creado con éxito!");
-        response.put("cliente", cliente);
+        response.put("cliente", clienteGuardado);
 
         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED) ;
     }
@@ -106,7 +113,7 @@ public class ClienteServiceImpl implements IClienteService
     }
 
     @Override
-    public ResponseEntity<Map<String, Object>> actualizarCliente( Long idCliente, Cliente clienteActualizado, BindingResult result) {
+    public ResponseEntity<Map<String, Object>> actualizarCliente( Long idCliente, ClienteDto clienteActualizado, BindingResult result) {
         response = new HashMap<>();
         stringBuilder = new StringBuilder();
 
@@ -129,7 +136,7 @@ public class ClienteServiceImpl implements IClienteService
             clienteAActualizar.setApellidos(clienteActualizado.getApellidos());
             clienteAActualizar.setDireccion(clienteActualizado.getDireccion());
 
-            clienteActualizado = iClienteDao.save(clienteAActualizar);
+            clienteAActualizar = iClienteDao.save(clienteAActualizar);
         }
         catch (DataAccessException e)
         {
@@ -138,7 +145,7 @@ public class ClienteServiceImpl implements IClienteService
             return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         response.put("mensaje", "El cliente ha sido actualizado con éxito!");
-        response.put("cliente", clienteActualizado);
+        response.put("cliente", clienteAActualizar);
 
         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED) ;
     }
