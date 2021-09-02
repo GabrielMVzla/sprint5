@@ -17,7 +17,7 @@ public class JavaDefaultConfig {
 
     @PostConstruct
     public void test(){
-        System.out.println(message);
+        System.err.println(message);
     }
 
 

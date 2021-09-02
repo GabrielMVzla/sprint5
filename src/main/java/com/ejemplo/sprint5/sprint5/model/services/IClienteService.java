@@ -5,23 +5,15 @@ import com.ejemplo.sprint5.sprint5.model.entity.Cliente;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
 import javax.validation.Valid;
-import java.util.List;
 import java.util.Map;
 
 
 public interface IClienteService
 {
 
-    /**
-     * Método que retonar listado de clientes
-     *
-     * @return List<Cliente>
-     */
-    List<Cliente> obtenerClientes();
 
     Page<Cliente> obtenerClientes(Pageable pageable);
 

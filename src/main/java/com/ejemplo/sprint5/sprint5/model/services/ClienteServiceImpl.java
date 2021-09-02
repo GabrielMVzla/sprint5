@@ -3,8 +3,8 @@ package com.ejemplo.sprint5.sprint5.model.services;
 import com.ejemplo.sprint5.sprint5.model.dao.IClienteDao;
 import com.ejemplo.sprint5.sprint5.model.dto.ClienteDto;
 import com.ejemplo.sprint5.sprint5.model.entity.Cliente;
+import com.ejemplo.sprint5.sprint5.utils.UtilString;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -35,11 +35,9 @@ public class ClienteServiceImpl implements IClienteService
     StringBuilder stringBuilder;
 
 
-    @Override
-    public List<Cliente> obtenerClientes()
-    {
-        return iClienteDao.findAll();
-    }
+    Cliente cliente;
+
+
 
     @Override
     public Page<Cliente> obtenerClientes(Pageable pageable)
@@ -53,33 +51,34 @@ public class ClienteServiceImpl implements IClienteService
     }
 
     @Override
-    public ResponseEntity<Map<String, Object>> guardarCliente(@Valid ClienteDto cliente, BindingResult result)
+    public ResponseEntity<Map<String, Object>> guardarCliente(@Valid ClienteDto clienteDto, BindingResult result)
     {
         response = new HashMap<>();
         stringBuilder = new StringBuilder();
 
-        Cliente clienteGuardado = new Cliente();
+        cliente = new Cliente();
+        cliente = clienteDto.toClient();
+
 
         if(erroresBinding(result))
             return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
 
         try
         {
-            clienteGuardado.setApellidos(cliente.getApellidos());
-            clienteGuardado.setNombres(cliente.getNombres());
-            clienteGuardado.setDireccion(cliente.getDireccion());
-            clienteGuardado = iClienteDao.save(clienteGuardado);
+            cliente = iClienteDao.save(cliente);
+
+
         }
         catch (DataAccessException e)
         {
-            response.put("mensaje", "Error al realizar el insert de 'cliente' en la base de datos!");
-            response.put("error", stringBuilder.append(e.getMessage()).append(": ").append(e.getMostSpecificCause().getMessage()).toString());
+            response.put(UtilString.MENSAJE, UtilString.CLIENTE_ERROR_CREADO);
+            response.put(UtilString.ERROR, stringBuilder.append(e.getMessage()).append(": ").append(e.getMostSpecificCause().getMessage()).toString());
             return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        response.put("mensaje", "El cliente ha sido creado con éxito!");
-        response.put("cliente", clienteGuardado);
+        response.put(UtilString.MENSAJE, UtilString.CLIENTE_CREADO);
+        response.put(UtilString.CLIENTE, cliente);
 
-        return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED) ;
+        return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
     }
 
     @Override
@@ -92,7 +91,7 @@ public class ClienteServiceImpl implements IClienteService
 
         if(clienteAEliminar == null)
         {
-            response.put("mensaje", stringBuilder.append("El cliente con id '").append(idCliente).append("' que quieres eliminar no existe!").toString());
+            response.put(UtilString.MENSAJE, stringBuilder.append("El cliente con id '").append(idCliente).append("' que quieres eliminar no existe!").toString());
             return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
         }
 
@@ -102,12 +101,12 @@ public class ClienteServiceImpl implements IClienteService
         }
         catch (DataAccessException e)
         {
-            response.put("mensaje", "Error al eliminar 'cliente' en la base de datos!");
-            response.put("error", stringBuilder.append(e.getMessage()).append(": ").append(e.getMostSpecificCause().getMessage()).toString());
+            response.put(UtilString.MENSAJE, UtilString.CLIENTE_ERORR_ELIMINAR);
+            response.put(UtilString.ERROR, stringBuilder.append(e.getMessage()).append(": ").append(e.getMostSpecificCause().getMessage()).toString());
             return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        response.put("mensaje", "El cliente ha sido eliminado con éxito!");
-        response.put("cliente", stringBuilder.append(clienteAEliminar.getNombres()).append(" ").append(clienteAEliminar.getApellidos()).toString());
+        response.put(UtilString.MENSAJE, UtilString.CLIENTE_ELIMINAR);
+        response.put(UtilString.CLIENTE, stringBuilder.append(clienteAEliminar.getNombres()).append(" ").append(clienteAEliminar.getApellidos()).toString());
 
         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK) ;
     }
@@ -121,7 +120,7 @@ public class ClienteServiceImpl implements IClienteService
 
         if(clienteAActualizar == null)
         {
-            response.put("mensaje", stringBuilder.append("El cliente con id '").append(idCliente).append("' que quieres actualizar no existe!").toString());
+            response.put(UtilString.MENSAJE, stringBuilder.append("El cliente con id '").append(idCliente).append("' que quieres actualizar no existe!").toString());
             return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
         }
 
@@ -132,20 +131,23 @@ public class ClienteServiceImpl implements IClienteService
 
         try
         {
+
+            cliente = clienteActualizado.toClient();
+
             clienteAActualizar.setNombres(clienteActualizado.getNombres());
             clienteAActualizar.setApellidos(clienteActualizado.getApellidos());
             clienteAActualizar.setDireccion(clienteActualizado.getDireccion());
 
-            clienteAActualizar = iClienteDao.save(clienteAActualizar);
+            cliente = iClienteDao.save(clienteAActualizar);
         }
         catch (DataAccessException e)
         {
-            response.put("mensaje", "Error al realizar actualización de 'cliente' en la base de datos!");
-            response.put("error", stringBuilder.append(e.getMessage()).append(": ").append(e.getMostSpecificCause().getMessage()).toString());
+            response.put(UtilString.MENSAJE, UtilString.CLIENTE_ERORR_ACTUALIZAR);
+            response.put(UtilString.ERROR, stringBuilder.append(e.getMessage()).append(": ").append(e.getMostSpecificCause().getMessage()).toString());
             return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        response.put("mensaje", "El cliente ha sido actualizado con éxito!");
-        response.put("cliente", clienteAActualizar);
+        response.put(UtilString.MENSAJE, UtilString.CLIENTE__ACTUALIZAR);
+        response.put(UtilString.CLIENTE, cliente);
 
         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED) ;
     }

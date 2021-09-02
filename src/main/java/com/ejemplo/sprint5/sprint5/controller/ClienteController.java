@@ -14,7 +14,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -22,16 +21,17 @@ import java.util.Map;
 @RequestMapping("/api")
 public class ClienteController
 {
+    final IClienteService clienteService;
+
     @Autowired
-    IClienteService clienteService;
+    public ClienteController(IClienteService clienteService) {
+        this.clienteService = clienteService;
+    }
 
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping("cliente/{idCliente}")
     public Cliente obtenerCliente(@PathVariable Long idCliente){        return clienteService.obtenerCliente(idCliente);    }
 
-    @Secured({"ROLE_USER", "ROLE_ADMIN"})
-    @GetMapping("clientes")
-    public List<Cliente> obtenerClientes(){     return clienteService.obtenerClientes();    }
 
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping("clientes/page/{page}")

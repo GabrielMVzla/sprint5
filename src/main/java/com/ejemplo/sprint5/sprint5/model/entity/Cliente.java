@@ -1,5 +1,6 @@
 package com.ejemplo.sprint5.sprint5.model.entity;
 
+import com.ejemplo.sprint5.sprint5.model.dto.ClienteDto;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -23,5 +24,24 @@ public class Cliente implements Serializable
     @NotBlank(message = "no debe estar vacío")
     @Pattern(regexp = "[\\w ]{1,10}", message = "debe tener una longitud máxima de 10, solo permite letras")
     private String direccion;
+
+    public ClienteDto toClient(ClienteDto clienteDto){
+        ClienteDto cliente = new ClienteDto();
+        cliente.setIdCliente(null);
+        cliente.setNombres(nombres);
+        cliente.setApellidos(apellidos);
+        cliente.setDireccion(direccion);
+        return cliente;
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "nombres='" + nombres + '\'' +
+                ", apellidos='" + apellidos + '\'' +
+                ", direccion='" + direccion + '\'' +
+                '}';
+    }
+
 
 }

@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 
 import java.util.*;
@@ -53,6 +54,18 @@ class UsuarioServiceImplTest {
         Assertions.assertEquals(usuario.getPassword(), response.getPassword());
 
     }
+
+    @Test
+    void whenGivenUserName_shouldReturnAError() {
+
+        UsernameNotFoundException error = Assertions.assertThrows(
+                UsernameNotFoundException.class,
+                () -> { service.loadUserByUsername("Pepito"); });
+
+
+        Assertions.assertEquals("Error en el login: no existe el usuario 'null' en el sistema!", error.getMessage());
+    }
+
 
     @Test
     void whenGivenUserName_shouldReturnUser() {
