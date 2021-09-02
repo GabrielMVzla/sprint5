@@ -32,8 +32,7 @@ class ClienteServiceImplTest
 
     private final IClienteDao reposirotyMock = mock(IClienteDao.class);
 
-    private Cliente cliente;
-
+    private Cliente cliente ;
     private ClienteDto clienteDto;
 
     private List<Cliente> clientes;
@@ -94,8 +93,8 @@ class ClienteServiceImplTest
 
         ResponseEntity<Map<String, Object>> response = service.guardarCliente(clienteDto, result);
 
-        assertEquals("El cliente ha sido creado con éxito!", Objects.requireNonNull(response.getBody()).get("mensaje"));
 
+        assertEquals("El cliente ha sido creado con éxito!", Objects.requireNonNull(response.getBody()).get("mensaje"));
 
 
         assertEquals( cliente.toString(), response.getBody().get("cliente").toString());
@@ -116,7 +115,9 @@ class ClienteServiceImplTest
     {
         BindingResult result = new BeanPropertyBindingResult(new Object(), "");
 
+
         ResponseEntity<Map<String, Object>> response = service.actualizarCliente((long) 100, clienteDto, result);
+
 
         assertEquals("El cliente ha sido actualizado con éxito!", Objects.requireNonNull(response.getBody()).get("mensaje"));
         assertEquals(cliente.toString(), response.getBody().get("cliente").toString());

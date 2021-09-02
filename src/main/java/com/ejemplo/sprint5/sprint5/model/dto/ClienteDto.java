@@ -6,9 +6,8 @@ import lombok.Data;
 import javax.validation.constraints.NotBlank;
 
 @Data
-public class ClienteDto {
-
-    private Long idCliente;
+public class ClienteDto
+{
 
     @NotBlank(message = "no debe estar vacío")
     private String nombres;
@@ -35,4 +34,5 @@ public class ClienteDto {
                 ", direccion='" + direccion + '\'' +
                 '}';
     }
+
 }
