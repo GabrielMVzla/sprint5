@@ -27,7 +27,7 @@ class ClienteServiceImplTest
     private IClienteDao reposirotyMock = mock(IClienteDao.class);
 
     private ClienteDto clienteDto = new ClienteDto();
-    Cliente cliente ;
+    private Cliente cliente ;
 
     @BeforeEach
     void setUp()

@@ -38,7 +38,7 @@ public class ClienteController
     public Page<Cliente> obtenerClientes(@PathVariable Integer page)
     {
         page = page < 0 ? 0 : page;
-        Pageable pageable = PageRequest.of(page, 2);
+        Pageable pageable = PageRequest.of(page, 10);
         return clienteService.obtenerClientes(pageable);
     }
 
