@@ -7,7 +7,7 @@ import javax.validation.constraints.Pattern;
 
 
 @Data
-public class ClienteDto 
+public class ClienteDto
 {
     @NotBlank(message = "no debe estar vacío")
     private String nombres, apellidos;
