@@ -13,8 +13,6 @@ import java.util.Map;
 
 public interface IClienteService
 {
-
-
     Page<Cliente> obtenerClientes(Pageable pageable);
 
     Cliente obtenerCliente(Long idCliente);

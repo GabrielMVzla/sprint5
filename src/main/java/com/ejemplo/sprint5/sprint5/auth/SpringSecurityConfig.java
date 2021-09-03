@@ -25,7 +25,6 @@ import org.springframework.web.filter.CorsFilter;
 @EnableGlobalMethodSecurity(securedEnabled = true)
 @Configuration
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
-
 	
 	@Autowired
 	private UserDetailsService usuarioService;
