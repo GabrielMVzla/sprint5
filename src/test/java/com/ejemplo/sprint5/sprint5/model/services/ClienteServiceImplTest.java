@@ -14,11 +14,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -122,4 +125,30 @@ class ClienteServiceImplTest
         assertEquals("El cliente ha sido actualizado con éxito!", Objects.requireNonNull(response.getBody()).get("mensaje"));
         assertEquals(cliente.toString(), response.getBody().get("cliente").toString());
     }
+
+
+    @Test
+    void givenBindingResult_returnFalse(){
+        BindingResult result = new BeanPropertyBindingResult(new Object(), "");
+
+
+        boolean response = service.erroresBinding(result);
+        assertFalse(response);
+    }
+
+    @Test
+    void givenError_returnTrue(){
+        BindingResult result = new BeanPropertyBindingResult(new Object(), "");
+
+        ObjectError error = new ObjectError("Error","Error al realizar el insert de 'cliente' en la base de datos!");
+
+
+        result.addError(error);
+
+
+        boolean response = service.erroresBinding(result);
+
+        assertTrue(response);
+    }
+
 }
