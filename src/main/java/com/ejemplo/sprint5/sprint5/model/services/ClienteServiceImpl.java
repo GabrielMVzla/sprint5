@@ -46,7 +46,8 @@ public class ClienteServiceImpl implements IClienteService
     }
 
     @Override
-    public ResponseEntity<Map<String, Object>> guardarCliente(@Valid ClienteDto clienteDto, BindingResult result)
+    public ResponseEntity<Map<String, Object>> guardarCliente
+            (@Valid ClienteDto clienteDto, BindingResult result)
     {
         response = new HashMap<>();
         stringBuilder = new StringBuilder();
@@ -54,15 +55,12 @@ public class ClienteServiceImpl implements IClienteService
         cliente = new Cliente();
         cliente = clienteDto.toClient();
 
-
         if(erroresBinding(result))
             return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
 
         try
         {
             cliente = iClienteDao.save(cliente);
-
-
         }
         catch (DataAccessException e)
         {
@@ -158,7 +156,9 @@ public class ClienteServiceImpl implements IClienteService
                     .stream()
                     .map(err -> {
                         stringBuilder = new StringBuilder();
-                        return stringBuilder.append("El campo '").append(err.getField()).append("' ").append(err.getDefaultMessage()).toString();
+                        return stringBuilder.append("El campo '")
+                                .append(err.getField()).append("' ")
+                                .append(err.getDefaultMessage()).toString();
                     })
                     .collect(Collectors.toList());
 
