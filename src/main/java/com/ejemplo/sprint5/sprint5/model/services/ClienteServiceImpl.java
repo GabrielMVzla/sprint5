@@ -152,10 +152,11 @@ public class ClienteServiceImpl implements IClienteService
         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED) ;
     }
 
-    public boolean erroresBinding( BindingResult result)
+    public boolean erroresBinding( BindingResult result )
     {
         if(result.hasErrors())
         {
+            response = new HashMap<>();
             stringBuilder = new StringBuilder();
 
             List<String> errors = result.getFieldErrors()
