@@ -8,7 +8,6 @@ import javax.validation.constraints.NotBlank;
 @Data
 public class ClienteDto
 {
-
     @NotBlank(message = "no debe estar vacío")
     private String nombres;
     @NotBlank(message = "no debe estar vacío")
@@ -16,7 +15,6 @@ public class ClienteDto
 
     @NotBlank(message = "no debe estar vacío")
     private String direccion;
-
 
     public Cliente toClient(){
         Cliente cliente = new Cliente();

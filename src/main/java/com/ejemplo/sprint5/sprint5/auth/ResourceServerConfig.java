@@ -21,9 +21,6 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter
 						"/configuration/security", "/common/**", "/resources/**",
 						"/v2/api-docs", "/configuration/ui", "/swagger-resources/**", "/configuration/**", "/swagger-ui.html/**", "/webjars/**"
 				).permitAll() // this should allow swagger to operate
-
-//				.antMatchers(HttpMethod.GET, "/**").permitAll() //nuestras rutas publicas que cualquier usuario puede acceder independiente si ha iniciado sesión o no
-//	        	.antMatchers(HttpMethod.POST, "/api/registrar").permitAll()
 	        	.anyRequest()
 	        	.authenticated()
 	        	;

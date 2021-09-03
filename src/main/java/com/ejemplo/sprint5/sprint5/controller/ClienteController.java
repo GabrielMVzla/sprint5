@@ -3,7 +3,6 @@ package com.ejemplo.sprint5.sprint5.controller;
 import com.ejemplo.sprint5.sprint5.model.dto.ClienteDto;
 import com.ejemplo.sprint5.sprint5.model.entity.Cliente;
 import com.ejemplo.sprint5.sprint5.model.services.IClienteService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.Map;
 
-@Slf4j
 @RestController
 @RequestMapping("/api")
 public class ClienteController

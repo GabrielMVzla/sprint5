@@ -4,7 +4,6 @@ import com.ejemplo.sprint5.sprint5.model.dao.IClienteDao;
 import com.ejemplo.sprint5.sprint5.model.dto.ClienteDto;
 import com.ejemplo.sprint5.sprint5.model.entity.Cliente;
 import com.ejemplo.sprint5.sprint5.utils.UtilString;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,7 +19,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@Slf4j
 @Service
 public class ClienteServiceImpl implements IClienteService
 {

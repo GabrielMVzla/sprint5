@@ -33,8 +33,24 @@ public class Role implements Serializable
 	@NotBlank
 	@Column( unique = true, length = 20)
 	private String nombre;
-	
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //	de esta manera tenemos mapeado también al usuario en la relación ManytoMany, pero en realidad no es necesaria aquí
 //	@ManyToMany(mappedBy = "roles")
 //	private List<Usuario> usuarios;
-}
