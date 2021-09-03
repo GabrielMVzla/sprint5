@@ -22,12 +22,14 @@ public class Cliente implements Serializable
     private String nombres, apellidos;
 
     @NotBlank(message = "no debe estar vacío")
-    @Pattern(regexp = "[\\w ]{1,10}", message = "debe tener una longitud máxima de 10, solo permite letras")
+    @Pattern(regexp = "[\\w ]{1,10}",
+            message =
+                    "debe tener una longitud máxima de 10, solo permite letras")
     private String direccion;
 
-    public ClienteDto toClient(ClienteDto clienteDto){
+    public ClienteDto toClient(ClienteDto clienteDto)
+    {
         ClienteDto cliente = new ClienteDto();
-//        cliente.setIdCliente(null);
         cliente.setNombres(nombres);
         cliente.setApellidos(apellidos);
         cliente.setDireccion(direccion);

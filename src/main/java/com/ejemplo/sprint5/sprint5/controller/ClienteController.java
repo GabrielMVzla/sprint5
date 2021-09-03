@@ -22,12 +22,8 @@ import java.util.Map;
 @RequestMapping("/api")
 public class ClienteController
 {
-    final IClienteService clienteService;
-
     @Autowired
-    public ClienteController(IClienteService clienteService) {
-        this.clienteService = clienteService;
-    }
+    private IClienteService clienteService;
 
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping("cliente/{idCliente}")

@@ -32,8 +32,6 @@ public class UsuarioServiceImpl implements UserDetailsService, IUsuarioService
 		this.iUsuarioDao = iUsuarioDao;
 	}
 
-
-	
 	@Override
 	@Transactional(readOnly=true)//como es una consulta tiene que ser solo de lectura "readOnly"
 	public UserDetails loadUserByUsername(String username)

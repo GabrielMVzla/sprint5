@@ -24,20 +24,15 @@ import java.util.stream.Collectors;
 @Service
 public class ClienteServiceImpl implements IClienteService
 {
-    IClienteDao iClienteDao;
+    private IClienteDao iClienteDao;
 
     ClienteServiceImpl(IClienteDao iClienteDao){
         this.iClienteDao = iClienteDao;
     }
 
-
-    Map<String, Object> response;
-    StringBuilder stringBuilder;
-
-
-    Cliente cliente;
-
-
+    private Map<String, Object> response;
+    private StringBuilder stringBuilder;
+    private Cliente cliente;
 
     @Override
     public Page<Cliente> obtenerClientes(Pageable pageable)
