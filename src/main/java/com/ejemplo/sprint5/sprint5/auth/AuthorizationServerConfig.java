@@ -32,7 +32,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	InfoAdicionalToken infoAdicionalToken;
 	
 	@Override
-	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception
+	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception //oauth/token
 	{	
 		security.tokenKeyAccess("permitAll()") // todo usuario puede autenticarse en el endpoint oauth/token, es nuestra ruta de login para iniciar sesión en nuestro autorizationService
 		.checkTokenAccess("isAuthenticated()"); //cada que queremos acceder a una pagina protegida debemos enviar nuestro token, y solo los clientes autenticados pueden acceder a esta ruta
@@ -58,6 +58,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 				.refreshTokenValiditySeconds(3600);
 	}
 
+	//genera el token si todo cumple
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception 
 	{
@@ -66,11 +67,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		tokenEnhancerChain.setTokenEnhancers(Arrays.asList(infoAdicionalToken, accessTokenConverter()));
 		
 		endpoints.authenticationManager(authenticationManager)
-				.tokenStore(tokenStore())
-				.accessTokenConverter(accessTokenConverter())
-				.tokenEnhancer(tokenEnhancerChain)
-		
-		;
+				.tokenStore(tokenStore()) //alamacena los datos pero por debajo utilizando JWT
+				.accessTokenConverter(accessTokenConverter())//almacena los datos de autenticación del usuario, el username, los roles y cualquier información
+				.tokenEnhancer(tokenEnhancerChain);			 // extra convierte a una información decodificada para que oauth2 pueda realizar el proc de autentica
+
 	}
 	
 	@Bean
@@ -79,6 +79,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Bean
 	public JwtAccessTokenConverter accessTokenConverter()
 	{
+		//traduce toda la información y authenticacion con oauth2 para codificar los datos y después para decodificar los datos
 		JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
 
 		//Llave secreta tipo RSA - aquí quien firma es la llave PRIVADA
@@ -88,6 +89,4 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
 		return jwtAccessTokenConverter;
 	}
-	
-	
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.BindingResult;
@@ -30,7 +31,7 @@ public class ClienteController
 
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping("cliente/{idCliente}")
-    public Cliente obtenerCliente(@PathVariable Long idCliente){        return clienteService.obtenerCliente(idCliente);    }
+    public Cliente obtenerCliente(@PathVariable Long idCliente){       return clienteService.obtenerCliente(idCliente);    }
 
 
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
@@ -38,7 +39,7 @@ public class ClienteController
     public Page<Cliente> obtenerClientes(@PathVariable Integer page)
     {
         page = page < 0 ? 0 : page;
-        Pageable pageable = PageRequest.of(page, 10);
+        Pageable pageable = PageRequest.of(page, 10, Sort.by("idCliente"));
         return clienteService.obtenerClientes(pageable);
     }
 

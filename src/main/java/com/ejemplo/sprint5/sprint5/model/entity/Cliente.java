@@ -27,7 +27,7 @@ public class Cliente implements Serializable
 
     public ClienteDto toClient(ClienteDto clienteDto){
         ClienteDto cliente = new ClienteDto();
-        cliente.setIdCliente(null);
+//        cliente.setIdCliente(null);
         cliente.setNombres(nombres);
         cliente.setApellidos(apellidos);
         cliente.setDireccion(direccion);
