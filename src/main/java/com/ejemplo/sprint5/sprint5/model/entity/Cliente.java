@@ -1,9 +1,11 @@
 package com.ejemplo.sprint5.sprint5.model.entity;
 
+import com.ejemplo.sprint5.sprint5.model.dto.ClienteDto;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 
 @Entity
@@ -13,10 +15,15 @@ public class Cliente implements Serializable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String idCliente;
+    @Column(name = "id_cliente_pk")
+    private Long idCliente;
 
+    @NotBlank(message = "no debe estar vacío")
     private String nombres, apellidos;
 
-    @Email
-    private String email;
+    @NotBlank(message = "no debe estar vacío")
+    @Pattern(regexp = "[\\w ]{1,10}",
+            message =
+                    "debe tener una longitud máxima de 10, solo permite letras")
+    private String direccion;
 }
