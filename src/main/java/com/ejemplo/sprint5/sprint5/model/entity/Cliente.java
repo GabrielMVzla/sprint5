@@ -26,24 +26,4 @@ public class Cliente implements Serializable
             message =
                     "debe tener una longitud máxima de 10, solo permite letras")
     private String direccion;
-
-    public ClienteDto toClient(ClienteDto clienteDto)
-    {
-        ClienteDto cliente = new ClienteDto();
-        cliente.setNombres(nombres);
-        cliente.setApellidos(apellidos);
-        cliente.setDireccion(direccion);
-        return cliente;
-    }
-
-    @Override
-    public String toString() {
-        return "Cliente{" +
-                "nombres='" + nombres + '\'' +
-                ", apellidos='" + apellidos + '\'' +
-                ", direccion='" + direccion + '\'' +
-                '}';
-    }
-
-
 }

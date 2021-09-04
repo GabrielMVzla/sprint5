@@ -10,6 +10,7 @@ public class ClienteDto
 {
     @NotBlank(message = "no debe estar vacío")
     private String nombres;
+
     @NotBlank(message = "no debe estar vacío")
     private String apellidos;
 

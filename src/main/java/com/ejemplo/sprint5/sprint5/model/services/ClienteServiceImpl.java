@@ -122,7 +122,6 @@ public class ClienteServiceImpl implements IClienteService
 
         try
         {
-
             cliente = clienteActualizado.toClient();
 
             clienteAActualizar.setNombres(clienteActualizado.getNombres());
